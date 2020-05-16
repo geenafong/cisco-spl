@@ -6,7 +6,7 @@ resource "aws_instance" "web2" {
 
     user_data = <<-EOF
     #!/bin/bash
-    echo “hello, I am Web2” >index.html
+    echo Hello, I am Web2, not running NGINX. >index.html
     nohup busybox httpd -f -p 80 &
     EOF
 
