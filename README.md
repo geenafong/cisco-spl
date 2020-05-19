@@ -7,6 +7,9 @@ To run this example run the following commands:
 terraform init
 terraform plan
 terraform apply -var 'key_name={your_key_name}'
+
+For a single command:
+terraform init; terraform apply -var 'key_name={your_key_name}'
 ```
 ** Make sure that you add your key pair where it says `your_key_name`, to create one log into AWS, navigate to EC2, in Network and Security, click on Key Pairs and create one there.
 
