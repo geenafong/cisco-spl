@@ -1,3 +1,3 @@
 output "elb-dns" {
-    value = aws_elb.elb2.dns_name
+    value = aws_elb.elb.dns_name
 }

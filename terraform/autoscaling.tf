@@ -7,7 +7,7 @@ resource "aws_autoscaling_group" "web" {
 
   health_check_type    = "ELB"
   load_balancers= [
-    aws_elb.elb2.id
+    aws_elb.elb.id
   ]
 
   launch_configuration = aws_launch_configuration.web2.name
@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "web" {
 
   tag {
     key                 = "Name"
-    value               = "web"
+    value               = "nginx web server"
     propagate_at_launch = true
   }
 }
@@ -49,6 +49,24 @@ resource "aws_autoscaling_policy" "web_policy_up" {
   autoscaling_group_name = aws_autoscaling_group.web.name
 }
 
+resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_up" {
+  alarm_name = "web_cpu_alarm_up"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods = "2"
+  metric_name = "CPUUtilization"
+  namespace = "AWS/EC2"
+  period = "120"
+  statistic = "Average"
+  threshold = "75"
+
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.web.name
+  }
+
+  alarm_description = "This metric monitor EC2 instance CPU utilization"
+  alarm_actions = [aws_autoscaling_policy.web_policy_up.arn]
+}
+
 //Scales autoscaling group down based on autoscaling capacity
 resource "aws_autoscaling_policy" "web_policy_down" {
   name = "web_policy_down"
@@ -56,4 +74,22 @@ resource "aws_autoscaling_policy" "web_policy_down" {
   adjustment_type = "ChangeInCapacity"
   cooldown = 300
   autoscaling_group_name = aws_autoscaling_group.web.name
+}
+
+resource "aws_cloudwatch_metric_alarm" "web_cpu_alarm_down" {
+  alarm_name = "web_cpu_alarm_down"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods = "2"
+  metric_name = "CPUUtilization"
+  namespace = "AWS/EC2"
+  period = "120"
+  statistic = "Average"
+  threshold = "15"
+
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.web.name
+  }
+
+  alarm_description = "This metric monitor EC2 instance CPU utilization"
+  alarm_actions = [aws_autoscaling_policy.web_policy_down.arn]
 }
