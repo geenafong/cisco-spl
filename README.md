@@ -2,7 +2,7 @@
 This example uses Terraform to create an AWS ELB in front of a dynamic number of EC2 instances, using Auto Scaling groups, to host a web server hosted by NGINX. For more information, reference the "Explanation of infrastructure" section below.
 
 # Usage
-To run this example run the following commands:
+To run this example run the following commands in the /terraform directory:
 ```
 terraform init
 terraform plan
