@@ -1,3 +1,3 @@
-output "elb-dns" {
-    value = aws_elb.elb.dns_name
-}
+# output "elb-dns" {
+#     value = aws_elb.elb.dns_name
+# }
