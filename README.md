@@ -46,3 +46,5 @@ Add Route53 DNS name
 Make security groups more fine-grained based on expectations of the app
 
 Make modules to make it easier for others to implement
+
+Create a backend S3 bucket so that members of the same team can be at the same remote state
