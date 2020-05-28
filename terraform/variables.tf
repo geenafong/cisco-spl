@@ -1,7 +1,7 @@
-# ubuntu-trusty-14.04 (x64)
+# ECS optimized (x64)
 variable "aws_amis" {
   default = {
-    "us-west-2" = "ami-7f675e4f"
+    "us-west-2" = "ami-088bb4cd2f62fc0e1"
   }
 }
 

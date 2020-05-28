@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "web2" {
     security_groups = [aws_security_group.websg.id]
     key_name = "Geena's Key Pair"
     associate_public_ip_address = true
-    iam_instance_profile = "${aws_iam_instance_profile.ecs.name}"
+    iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
     user_data = "#!/bin/bash\necho ECS_CLUSTER='${var.ecs_cluster_name}' > /etc/ecs/ecs.config"
 
     lifecycle {
@@ -19,7 +19,6 @@ resource "aws_ecs_cluster" "main" {
 }
 
 resource "aws_autoscaling_group" "ecs-cluster" {
-    availability_zones = ["us-west-2a"]
     name = "ECS ${var.ecs_cluster_name}"
     min_size = 1
     max_size = 3
@@ -30,63 +29,6 @@ resource "aws_autoscaling_group" "ecs-cluster" {
         aws_subnet.public_us_west_2a.*.id,
         aws_subnet.public_us_west_2b.*.id
     ])
-}
-
-resource "aws_iam_role" "ecs_host_role" {
-    name = "ecs_host_role"
-    assume_role_policy = "${file("policies/ecs-role.json")}"
-}
-
-resource "aws_iam_role_policy" "ecs_instance_role_policy" {
-    name = "ecs_instance_role_policy"
-    policy = "${file("policies/ecs-instance-role-policy.json")}"
-    role = "${aws_iam_role.ecs_host_role.id}"
-}
-
-resource "aws_iam_role" "ecs_service_role" {
-    name = "ecs_service_role"
-    assume_role_policy = "${file("policies/ecs-role.json")}"
-}
-
-resource "aws_iam_role_policy" "ecs_service_role_policy" {
-    name = "ecs_service_role_policy"
-    policy = "${file("policies/ecs-service-role-policy.json")}"
-    role = "${aws_iam_role.ecs_service_role.id}"
-}
-
-resource "aws_iam_instance_profile" "ecs" {
-    name = "ecs-instance-profile"
-    path = "/"
-    roles = ["${aws_iam_role.ecs_host_role.name}"]
-}
-
-data "aws_iam_policy_document" "ecs_instance_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role" "ecs_instance_role" {
-  name               = "ecs-instance-role"
-  assume_role_policy = data.aws_iam_policy_document.ecs_instance_assume_role_policy.json
-}
-
-resource "aws_iam_role_policy_attachment" "ecs_instance_role_policy" {
-  count = var.use_AmazonEC2ContainerServiceforEC2Role_policy ? 1 : 0
-
-  role       = aws_iam_role.ecs_instance_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
-}
-
-resource "aws_iam_instance_profile" "ecs_instance_profile" {
-  name = "ecsInstanceRole"
-  path = "/"
-  role = aws_iam_role.ecs_instance_role.name
 }
 
 resource "aws_ecs_task_definition" "test-http" {
