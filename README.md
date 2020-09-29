@@ -35,6 +35,7 @@ If the app is not running as expected and you want to SSH into the running insta
 2) In the side bar, click on `instances`
 3) Select the instance that you want to troubleshoot and click `connect`
 4) Use your key pair and follow the instructions provided by AWS.
+test
 
 # Further Implementations
 Spin up NGINX Web Server using a Containerized App instead of within the EC2 instance.
