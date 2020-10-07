@@ -1,6 +1,7 @@
 # AWS EC2, ELB, Autoscaling, NGINX web server example
 This example uses Terraform to create an AWS ELB in front of a dynamic number of EC2 instances, using Auto Scaling groups, to host a web server hosted by NGINX. For more information, reference the "Explanation of infrastructure" section below.
 
+
 # Usage
 To run this example run the following commands in the /terraform directory:
 ```
@@ -35,6 +36,7 @@ If the app is not running as expected and you want to SSH into the running insta
 2) In the side bar, click on `instances`
 3) Select the instance that you want to troubleshoot and click `connect`
 4) Use your key pair and follow the instructions provided by AWS.
+
 
 # Further Implementations
 Spin up NGINX Web Server using a Containerized App instead of within the EC2 instance.
