@@ -36,6 +36,7 @@ If the app is not running as expected and you want to SSH into the running insta
 3) Select the instance that you want to troubleshoot and click `connect`
 4) Use your key pair and follow the instructions provided by AWS.
 
+
 # Further Implementations
 Spin up NGINX Web Server using a Containerized App instead of within the EC2 instance.
 
@@ -44,3 +45,4 @@ Consider using Elastic Beanstalk, ECS or Fargate to orchestrate different AWS se
 Add Route53 DNS name
 
 Make security groups more fine-grained based on expectations of the app
+ test2
