@@ -1,6 +1,7 @@
 # AWS EC2, ELB, Autoscaling, NGINX web server example
 This example uses Terraform to create an AWS ELB in front of a dynamic number of EC2 instances, using Auto Scaling groups, to host a web server hosted by NGINX. For more information, reference the "Explanation of infrastructure" section below.
 
+
 # Usage
 To run this example run the following commands in the /terraform directory:
 ```
@@ -45,4 +46,3 @@ Consider using Elastic Beanstalk, ECS or Fargate to orchestrate different AWS se
 Add Route53 DNS name
 
 Make security groups more fine-grained based on expectations of the app
- test2
