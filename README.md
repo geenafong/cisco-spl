@@ -43,6 +43,6 @@ Spin up NGINX Web Server using a Containerized App instead of within the EC2 ins
 
 Consider using Elastic Beanstalk, ECS or Fargate to orchestrate different AWS services. 
 
-Add Route53 DNS name
+Add Route53 DNS name.
 
-Make security groups more fine-grained based on expectations of the app
+Make security groups more fine-grained based on expectations of the app.
