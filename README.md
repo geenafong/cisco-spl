@@ -38,7 +38,7 @@ If the app is not running as expected and you want to SSH into the running insta
 4) Use your key pair and follow the instructions provided by AWS.
 
 
-# Further Implementations
+# Further Implementations for this Application
 Spin up NGINX Web Server using a Containerized App instead of within the EC2 instance.
 
 Consider using Elastic Beanstalk, ECS or Fargate to orchestrate different AWS services. 
