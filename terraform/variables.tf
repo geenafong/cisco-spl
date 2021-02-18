@@ -1,5 +1,5 @@
 # ubuntu-trusty-14.04 (x64)
-variable "aws_amis" {
+variable "aws_ami" {
   default = {
     "us-west-2" = "ami-7f675e4f"
   }
