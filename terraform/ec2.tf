@@ -1,3 +1,4 @@
+//EC2 Launch Config
 resource "aws_launch_configuration" "web2" {
     name_prefix = "web-"
     image_id = lookup(var.aws_amis, var.aws_region)
@@ -11,5 +12,4 @@ resource "aws_launch_configuration" "web2" {
     lifecycle {
         create_before_destroy = true
     }
-
 }
